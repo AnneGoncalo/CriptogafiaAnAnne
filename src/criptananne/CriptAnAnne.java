@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class CriptAnAnne {
 
+    /*
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
@@ -33,26 +34,28 @@ public class CriptAnAnne {
         }
     
     }
-
-    public static String Criptografar(String tPlano, int chave) {
-        String texto = "";
-        tPlano = tPlano.replaceAll(" ", "");
-
-        if (tPlano.length() % chave != 0) {
-            tPlano += CompletarTexto(texto, chave - (tPlano.length() % chave));
-        }
-        for (int i = 0; i < tPlano.length(); i += chave) {
-            String pedaco = tPlano.substring(i, i + chave);
-            pedaco = new StringBuilder(pedaco).reverse().toString();
-            //System.out.println("Pedaco: " + pedaco);
-            texto += pedaco;
-        }
+    */
+    
+    public static String Criptografar(String texto, int chave) {
+        texto = texto.replaceAll(" ", "");
+        
+        texto = TrocarLetras(texto);
+        texto = EmbaralharLetras(texto, chave);
 
         return texto.toUpperCase();
     }
+    
+    public static String Descriptografar(String texto, int chave) {
+        texto = texto.replaceAll(" ", "");
+        
+        texto = EmbaralharLetras(texto, chave);
+        texto = VoltarLetras(texto);
+
+        return texto.toLowerCase();
+    }
 
     public static String CompletarTexto(String texto, int falta) {
-        String letras = "ABCDEFGHIJKLMNOPQRSTUVYWXZ";
+        String letras = "abcdefghijklmnopqrstuvywxz";
         int index = 0;
         Random random = new Random();
 
@@ -63,8 +66,51 @@ public class CriptAnAnne {
         return texto;
     }
 
-    public static String Descriptografar(String cript, int chave) {
-        return Criptografar(cript, chave).toLowerCase();
+    public static String TrocarLetras(String texto){
+        String novo = "";
+        texto = texto.toLowerCase();
+        for(int i = 0; i<texto.length(); i++){
+            char letra = texto.charAt(i);
+            int l = (int) (letra);
+            l += i+1;
+            if(l > 122)
+                l-=26;
+            letra = (char) (l);
+            System.out.println("letra : " + letra);
+            novo += letra;
+        }
+        return novo;
     }
-
+    
+    public static String VoltarLetras(String texto){
+        String novo = "";
+        texto = texto.toLowerCase();
+        for(int i = 0; i<texto.length(); i++){
+            char letra = texto.charAt(i);
+            int l = (int) (letra);
+            l -= i+1;
+            if(l < 97)
+                l+= 26;
+            letra = (char) (l);
+            System.out.println("letra : " + letra);
+            novo += letra;
+        }
+        return novo;
+    }
+    
+    public static String EmbaralharLetras(String texto, int chave){
+        String novo = "";
+        
+        if (texto.length() % chave != 0) {
+            texto = CompletarTexto(texto, chave - (texto.length() % chave));
+        }
+        for (int i = 0; i < texto.length(); i += chave) {
+            String pedaco = texto.substring(i, i + chave);
+            pedaco = new StringBuilder(pedaco).reverse().toString();
+            novo += pedaco;
+        }
+        
+        return novo;
+    }
+    
 }
