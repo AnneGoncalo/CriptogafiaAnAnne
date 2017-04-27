@@ -1,4 +1,3 @@
-
 package criptananne;
 
 public class janela extends javax.swing.JFrame {
@@ -22,6 +21,7 @@ public class janela extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(254, 254, 254));
 
         resultado.setName("resultado"); // NOI18N
         resultado.addActionListener(new java.awt.event.ActionListener() {
@@ -38,6 +38,7 @@ public class janela extends javax.swing.JFrame {
         });
 
         btnCript.setBackground(new java.awt.Color(255, 118, 17));
+        btnCript.setForeground(new java.awt.Color(248, 243, 235));
         btnCript.setText("Criptografar");
         btnCript.setName("btnCript"); // NOI18N
         btnCript.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +48,7 @@ public class janela extends javax.swing.JFrame {
         });
 
         btnDescript.setBackground(new java.awt.Color(110, 2, 74));
+        btnDescript.setForeground(new java.awt.Color(242, 231, 246));
         btnDescript.setText("Descriptografar");
         btnDescript.setName("btnDescript"); // NOI18N
         btnDescript.addActionListener(new java.awt.event.ActionListener() {
@@ -62,13 +64,16 @@ public class janela extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(255, 0, 159));
+        jLabel1.setForeground(new java.awt.Color(238, 18, 153));
         jLabel1.setText("Criptografia AnAnne");
 
+        jLabel2.setForeground(new java.awt.Color(238, 18, 153));
         jLabel2.setText("Texto:");
 
+        jLabel3.setForeground(new java.awt.Color(238, 18, 153));
         jLabel3.setText("Chave:");
 
+        jLabel4.setForeground(new java.awt.Color(238, 18, 153));
         jLabel4.setText("Resultado:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,11 +152,14 @@ public class janela extends javax.swing.JFrame {
     }//GEN-LAST:event_chaveActionPerformed
 
     private void btnCriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriptActionPerformed
-        
-        String txt = texto.getText();
-        int key = Integer.parseInt(chave.getText());
-        resultado.setText(CriptAnAnne.Criptografar(txt, key));
-       
+
+        if (!texto.getText().isEmpty()) {
+            String txt = texto.getText();
+            int key = 1;
+            if(!chave.getText().isEmpty())
+                key = Integer.parseInt(chave.getText());
+            resultado.setText(CriptAnAnne.Criptografar(txt, key));
+        }
     }//GEN-LAST:event_btnCriptActionPerformed
 
     private void textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoActionPerformed
@@ -159,11 +167,16 @@ public class janela extends javax.swing.JFrame {
     }//GEN-LAST:event_textoActionPerformed
 
     private void btnDescriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescriptActionPerformed
-        
-        String txt = texto.getText();
-        int key = Integer.parseInt(chave.getText());
-        resultado.setText(CriptAnAnne.Descriptografar(txt, key));
-        
+
+        if (!texto.getText().isEmpty()) {
+            String txt = texto.getText();
+            int key = 1;
+            if(!chave.getText().isEmpty())
+                key = Integer.parseInt(chave.getText());
+            
+            resultado.setText(CriptAnAnne.Descriptografar(txt, key));
+        }
+
     }//GEN-LAST:event_btnDescriptActionPerformed
 
     /**
